@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #f0f9fa;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --border: rgba(148, 163, 184, 0.35);
+    --brand: #0d9488;
+    --brand-light: #2dd4bf;
+    --brand-deep: #0f766e;
+    --gradient-hero: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 45%, #ecfeff 100%);
+  }
+
+  .dark {
+    --bg: #0a1018;
+    --bg-card: rgba(15, 23, 42, 0.72);
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: rgba(71, 85, 105, 0.5);
+    --brand: #2dd4bf;
+    --brand-light: #5eead4;
+    --brand-deep: #14b8a6;
+    --gradient-hero: linear-gradient(145deg, #0a1018 0%, #0f172a 50%, #042f2e 100%);
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui, sans-serif;
+    @apply antialiased transition-colors duration-300;
+  }
+
+  .app-shell {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in srgb, var(--brand) 12%, transparent), transparent),
+      var(--bg);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border shadow-sm backdrop-blur-xl;
+    background: var(--bg-card);
+    border-color: var(--border);
+    box-shadow: 0 1px 0 color-mix(in srgb, white 40%, transparent) inset;
+  }
+  .dark .glass-card {
+    box-shadow: 0 1px 0 color-mix(in srgb, white 6%, transparent) inset;
+  }
+
+  .section-label {
+    @apply text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)];
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:opacity-95 hover:shadow-xl active:scale-[0.98];
+    background: linear-gradient(135deg, var(--brand-deep), var(--brand));
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border px-6 py-3 text-sm font-semibold backdrop-blur transition;
+    background: var(--bg-card);
+    border-color: var(--border);
+  }
+  .btn-secondary:hover {
+    border-color: var(--brand);
+    color: var(--brand-deep);
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border bg-white/70 px-4 py-2.5 text-sm outline-none transition dark:bg-slate-900/50;
+    border-color: var(--border);
+  }
+  .input-field:focus {
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 25%, transparent);
+  }
+
+  .page-title {
+    @apply text-2xl font-bold tracking-tight md:text-3xl;
+  }
+
+  .text-brand {
+    color: var(--brand-deep);
+  }
+  .dark .text-brand {
+    color: var(--brand-light);
+  }
+  .border-brand {
+    border-color: var(--brand);
+  }
+  .bg-brand\/10 {
+    background-color: color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .ring-brand\/30 {
+    --tw-ring-color: color-mix(in srgb, var(--brand) 30%, transparent);
+  }
+
+  .model-hero-card {
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--brand-deep) 18%, var(--bg-card)),
+      var(--bg-card) 55%,
+      color-mix(in srgb, var(--brand) 8%, var(--bg-card))
+    );
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--brand) 35%, transparent),
+      0 20px 50px -20px color-mix(in srgb, var(--brand-deep) 45%, transparent);
+  }
+}

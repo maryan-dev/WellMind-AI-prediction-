@@ -1,0 +1,61 @@
+{
+  "best_model": "XGBoost",
+  "comparison": [
+    {
+      "Model": "XGBoost",
+      "Accuracy": 0.8393,
+      "Precision (macro)": 0.8393,
+      "Recall (macro)": 0.8393,
+      "Macro F1": 0.7925
+    },
+    {
+      "Model": "K-Nearest Neighbors",
+      "Accuracy": 0.8307,
+      "Precision (macro)": 0.8307,
+      "Recall (macro)": 0.8307,
+      "Macro F1": 0.7875
+    },
+    {
+      "Model": "Random Forest",
+      "Accuracy": 0.7877,
+      "Precision (macro)": 0.7877,
+      "Recall (macro)": 0.7877,
+      "Macro F1": 0.7641
+    },
+    {
+      "Model": "Logistic Regression",
+      "Accuracy": 0.78,
+      "Precision (macro)": 0.78,
+      "Recall (macro)": 0.78,
+      "Macro F1": 0.7638
+    },
+    {
+      "Model": "Decision Tree",
+      "Accuracy": 0.774,
+      "Precision (macro)": 0.774,
+      "Recall (macro)": 0.774,
+      "Macro F1": 0.7537
+    }
+  ],
+  "source": "notebook\\model_comparison.csv",
+  "leakage_analysis": {
+    "model_training_features": [
+      "Age",
+      "Gender",
+      "Occupation",
+      "Sleep Duration",
+      "Quality of Sleep",
+      "Physical Activity Level",
+      "Stress Level",
+      "BMI Category",
+      "Daily Steps",
+      "Sleep Disorder"
+    ],
+    "target_definition": {
+      "Healthy": "Wellness Score >= 75",
+      "Average": "Wellness Score 50\u201374",
+      "Poor": "Wellness Score < 50"
+    },
+    "design_note": "Metrics from notebook/2_train_models.ipynb on notebook/data train & test CSVs."
+  }
+}
