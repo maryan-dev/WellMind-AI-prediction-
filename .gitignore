@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Notebook artifacts (regenerate via notebooks)
+notebook/artifacts/*.pkl
+notebook/plots/
+
+# Duplicate / legacy data (use notebook/ only)
+dataset/
+
+# Build outputs
+frontend/dist/
+frontend/node_modules/
+mobile/build/
+mobile/.dart_tool/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Root duplicate raw CSV (canonical: notebook/Sleep_Data_Sampled.csv)
+/Sleep_Data_Sampled.csv
