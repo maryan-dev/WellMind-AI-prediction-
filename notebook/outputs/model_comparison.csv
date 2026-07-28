@@ -1,0 +1,6 @@
+Model,Train Accuracy,Test Accuracy,Gap (Train-Test),Macro F1
+XGBoost,0.8696,0.8393,0.0302,0.7925
+K-Nearest Neighbors,0.8518,0.8307,0.0211,0.7875
+Random Forest,0.8483,0.7877,0.0607,0.7641
+Logistic Regression,0.7957,0.78,0.0157,0.7638
+Decision Tree,0.8265,0.774,0.0525,0.7537
