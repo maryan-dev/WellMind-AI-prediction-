@@ -1,31 +1,15 @@
-# Keep Vercel uploads small — static site is frontend/ only.
-# (Use Vercel Root Directory = frontend, or root vercel.json below.)
-
 api
 notebook
 mobile
 scripts
-submission_portal
 dataset
-
 venv
 .venv
 **/__pycache__
-
 node_modules
 **/node_modules
-frontend/dist
-mobile/build
-mobile/.dart_tool
-
 *.pkl
 *.joblib
 *.pickle
-*.parquet
-
-.git
-.cursor
-terminals
-
-# Optional: exclude heavy CSV from serverless bundles (still in Git for capstone)
-# notebook/data
+mobile/build
+mobile/.dart_tool
