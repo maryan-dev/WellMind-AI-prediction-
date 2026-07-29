@@ -9,6 +9,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import VercelLogotype from "../components/VercelLogotype";
 
 const features = [
   {
@@ -154,7 +155,16 @@ export default function LandingPage() {
       </section>
 
       <footer className="border-t border-[var(--border)] py-8 text-center text-sm text-[var(--text-muted)]">
-        © {new Date().getFullYear()} WellMind AI — Personal Wellness Recommendation System
+        <p>© {new Date().getFullYear()} WellMind AI — Personal Wellness Recommendation System</p>
+        <a
+          href="https://vercel.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs text-[var(--text-muted)] transition hover:bg-white/10 hover:text-[var(--text)]"
+        >
+          <VercelLogotype className="h-2.5 opacity-80" />
+          <span>Deployed on Vercel</span>
+        </a>
       </footer>
     </div>
   );
