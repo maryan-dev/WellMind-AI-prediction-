@@ -112,7 +112,7 @@ npm run dev
 
 Open http://localhost:5173 (API on port **8000**).
 
-**Vercel (frontend only):** Settings → **Root Directory = `frontend`** · Framework **Vite** · no Python. See `frontend/README.md` if deploy shows **Error**.
+**Vercel (frontend only):** Settings → **Root Directory = `frontend`** · Framework **Vite** · set `VITE_API_URL` to your public API · no Python (avoids 500 MB errors). See `frontend/VERCEL.md` if deploy fails.
 
 ## 📱 Mobile (Flutter)
 
