@@ -1,25 +1,51 @@
 # Python
+venv/
+.venv/
 __pycache__/
 *.py[cod]
-.venv/
-venv/
+*.pyo
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
 
-# Notebook artifacts (regenerate via notebooks)
-notebook/artifacts/*.pkl
-notebook/plots/
+# Node
+node_modules/
+**/node_modules/
+.npm/
 
-# Duplicate / legacy data (use notebook/ only)
+# ML artifacts
+*.pkl
+*.joblib
+*.pickle
+notebook/artifacts/
+models/
+
+# Large data (keep raw in repo for capstone; ignore extras)
+*.parquet
 dataset/
 
-# Build outputs
+# Environment
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Build / IDE
 frontend/dist/
-frontend/node_modules/
 mobile/build/
 mobile/.dart_tool/
+.idea/
+.vscode/
+*.log
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Root duplicate raw CSV (canonical: notebook/Sleep_Data_Sampled.csv)
+# Notebook plots
+notebook/plots/
+
+# Root duplicate CSV
 /Sleep_Data_Sampled.csv
