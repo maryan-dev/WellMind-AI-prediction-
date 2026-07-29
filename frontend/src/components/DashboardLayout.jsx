@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu } from "lucide-react";
+import MobileTabBar from "./MobileTabBar";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
@@ -30,7 +31,7 @@ export default function DashboardLayout({ children, title, subtitle }) {
           </div>
         )}
 
-        <main className="min-w-0 flex-1 px-4 pb-10 pt-4 md:px-2 md:pt-0">
+        <main className="min-w-0 flex-1 px-4 pb-24 pt-4 md:px-2 md:pb-10 md:pt-0">
           <div className="mb-6 flex items-start justify-between gap-3">
             <div className="min-w-0">
               {title && <h1 className="page-title truncate">{title}</h1>}
@@ -48,6 +49,7 @@ export default function DashboardLayout({ children, title, subtitle }) {
           <div className="mx-auto max-w-5xl">{children}</div>
         </main>
       </div>
+      <MobileTabBar />
     </div>
   );
 }

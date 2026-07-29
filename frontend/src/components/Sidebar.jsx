@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import BrandLogo from "./BrandLogo";
 import {
   Activity,
   BrainCircuit,
@@ -21,7 +22,7 @@ export default function Sidebar({ onNavigate }) {
   return (
     <aside className="flex h-full flex-col p-3 md:p-4">
       <div className="mb-6 hidden px-2 md:block">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">Menu</p>
+        <BrandLogo to={null} showSubtitle={false} compact />
       </div>
 
       <nav className="flex flex-1 flex-col gap-0.5">

@@ -4,11 +4,16 @@ import {
   ArrowRight,
   BarChart3,
   Brain,
+  CheckCircle2,
+  ClipboardList,
   Heart,
+  Lightbulb,
   Moon,
   Sparkles,
+  Workflow,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
+import IconBadge from "../components/IconBadge";
 import VercelLogotype from "../components/VercelLogotype";
 
 const features = [
@@ -35,9 +40,24 @@ const features = [
 ];
 
 const steps = [
-  { n: "01", title: "Enter lifestyle data", text: "Sleep, stress, activity, and daily habits." },
-  { n: "02", title: "AI analyzes patterns", text: "Models evaluate your wellness category." },
-  { n: "03", title: "Get recommendations", text: "Actionable tips for a healthier routine." },
+  {
+    icon: ClipboardList,
+    n: "01",
+    title: "Enter lifestyle data",
+    text: "Sleep, stress, activity, and daily habits.",
+  },
+  {
+    icon: Workflow,
+    n: "02",
+    title: "AI analyzes patterns",
+    text: "Models evaluate your wellness category.",
+  },
+  {
+    icon: Lightbulb,
+    n: "03",
+    title: "Get recommendations",
+    text: "Actionable tips for a healthier routine.",
+  },
 ];
 
 export default function LandingPage() {
@@ -48,6 +68,7 @@ export default function LandingPage() {
       <section className="mx-auto max-w-7xl px-4 pb-16 pt-12 md:px-6 md:pt-20">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="animate-slide-up">
+            <p className="section-label-brand mb-3">Machine learning wellness tool</p>
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--bg-card)] px-3 py-1 text-xs font-medium backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-ai" /> AI-powered wellness platform
             </div>
@@ -74,13 +95,21 @@ export default function LandingPage() {
           <div className="glass-card relative overflow-hidden p-6 animate-fade-in">
             <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-health/20 blur-3xl" />
             <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-ai/20 blur-3xl" />
+            <p className="section-label-brand relative mb-4">Preview</p>
             <div className="relative space-y-4">
+              <div className="flex flex-col items-center rounded-2xl border border-[var(--border)] bg-white/30 px-4 py-6 dark:bg-slate-900/25">
+                <IconBadge icon={Activity} size="xl" variant="hero" />
+                <p className="mt-4 text-sm font-semibold">Ready for your check</p>
+                <p className="mt-1 max-w-xs text-center text-xs text-[var(--text-muted)]">
+                  Complete a wellness check to see your live score and AI category.
+                </p>
+              </div>
               <div className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-white/40 p-4 dark:bg-slate-900/30">
                 <div>
                   <p className="text-xs text-[var(--text-muted)]">Wellness Score</p>
                   <p className="text-3xl font-bold">85</p>
                 </div>
-                <Activity className="h-8 w-8 text-health" />
+                <IconBadge icon={BarChart3} size="md" variant="brand" />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {["Sleep 85%", "Activity 75%", "Stress 30%", "Energy 75%"].map((item) => (
@@ -92,22 +121,18 @@ export default function LandingPage() {
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-[var(--text-muted)]">
-                Preview dashboard — complete a check to see your live results.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 md:px-6">
-        <h2 className="text-center text-3xl font-bold">Features</h2>
+        <p className="section-label-brand text-center">Features</p>
+        <h2 className="mt-2 text-center text-3xl font-bold">Everything you need</h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map(({ icon: Icon, title, text }) => (
+          {features.map(({ icon, title, text }) => (
             <article key={title} className="glass-card p-5 transition hover:-translate-y-1">
-              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-health/20 to-ai/20">
-                <Icon className="h-5 w-5 text-health dark:text-ai-light" />
-              </div>
+              <IconBadge icon={icon} size="md" variant="hero" className="mb-3" />
               <h3 className="font-semibold">{title}</h3>
               <p className="mt-2 text-sm text-[var(--text-muted)]">{text}</p>
             </article>
@@ -117,13 +142,17 @@ export default function LandingPage() {
 
       <section id="how-it-works" className="mx-auto max-w-7xl px-4 py-16 md:px-6">
         <div className="glass-card p-8 md:p-10">
-          <h2 className="text-3xl font-bold">How It Works</h2>
+          <p className="section-label-brand">How it works</p>
+          <h2 className="mt-2 text-3xl font-bold">Three simple steps</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {steps.map((s) => (
-              <div key={s.n} className="rounded-2xl border border-[var(--border)] p-5">
-                <span className="text-sm font-bold text-ai">{s.n}</span>
-                <h3 className="mt-2 font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm text-[var(--text-muted)]">{s.text}</p>
+            {steps.map(({ icon, n, title, text }) => (
+              <div key={n} className="rounded-2xl border border-[var(--border)] p-5">
+                <div className="flex items-center gap-3">
+                  <IconBadge icon={icon} size="sm" variant="brand" />
+                  <span className="text-sm font-bold text-ai">{n}</span>
+                </div>
+                <h3 className="mt-3 font-semibold">{title}</h3>
+                <p className="mt-2 text-sm text-[var(--text-muted)]">{text}</p>
               </div>
             ))}
           </div>
@@ -140,16 +169,17 @@ export default function LandingPage() {
               "Personalized AI recommendations",
               "Track progress over time",
             ].map((b) => (
-              <li key={b} className="flex items-center gap-2 text-white/95">
-                <CheckCircle /> {b}
+              <li key={b} className="flex items-center gap-2.5 text-white/95">
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-white/90" strokeWidth={2.25} />
+                {b}
               </li>
             ))}
           </ul>
           <Link
             to="/wellness-check"
-            className="mt-8 inline-flex rounded-xl bg-white px-6 py-3 text-sm font-semibold text-health"
+            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-health"
           >
-            Start Your Check
+            Start Your Check <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
@@ -167,13 +197,5 @@ export default function LandingPage() {
         </a>
       </footer>
     </div>
-  );
-}
-
-function CheckCircle() {
-  return (
-    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20 text-xs">
-      ✓
-    </span>
   );
 }

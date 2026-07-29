@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
+import BrandLogo from "./BrandLogo";
 
 const landingNav = [
   { to: "/", label: "Home" },
@@ -18,14 +19,7 @@ export default function Navbar({ variant = "landing" }) {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg-card)]/90 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-6">
-        <Link to={isApp ? "/dashboard" : "/"} className="flex items-center gap-2.5 font-bold">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-deep to-brand text-sm text-white shadow-md">
-            W
-          </span>
-          <span className="hidden bg-gradient-to-r from-brand-deep to-brand-light bg-clip-text text-transparent sm:inline">
-            WellMind AI
-          </span>
-        </Link>
+        <BrandLogo to={isApp ? "/dashboard" : "/"} showSubtitle={!isApp} />
 
         {!isApp && (
           <nav className="hidden items-center gap-1 md:flex">
@@ -52,10 +46,20 @@ export default function Navbar({ variant = "landing" }) {
           <button
             type="button"
             onClick={toggle}
-            className="rounded-xl border border-[var(--border)] p-2 transition hover:border-brand/40"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--bg-card)] px-3 py-1.5 text-xs font-medium transition hover:border-brand/40"
             aria-label="Toggle theme"
           >
-            {isDark ? <Sun className="h-5 w-5 text-amber-300" /> : <Moon className="h-5 w-5 text-slate-600" />}
+            {isDark ? (
+              <>
+                <Sun className="h-4 w-4 text-amber-300" />
+                <span className="hidden sm:inline">Light mode</span>
+              </>
+            ) : (
+              <>
+                <Moon className="h-4 w-4 text-slate-600" />
+                <span className="hidden sm:inline">Dark mode</span>
+              </>
+            )}
           </button>
           <Link
             to="/wellness-check"

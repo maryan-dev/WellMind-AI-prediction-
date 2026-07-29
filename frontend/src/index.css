@@ -56,6 +56,10 @@
     @apply text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)];
   }
 
+  .section-label-brand {
+    @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-brand;
+  }
+
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:opacity-95 hover:shadow-xl active:scale-[0.98];
     background: linear-gradient(135deg, var(--brand-deep), var(--brand));
