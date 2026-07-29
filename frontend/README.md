@@ -36,12 +36,18 @@ With the backend running, the form calls **`POST /api/predict`** (proxied to Fas
 
 Optional env: `frontend/.env` → `VITE_API_URL=http://127.0.0.1:8000` (see `.env.example`)
 
-## Vercel
+## Vercel (fix failed deploys)
 
-- Config: `vercel.json` (Vite build, SPA rewrites)
-- Import repo with **Root Directory = `frontend`**
-- Set **`VITE_API_URL`** to your deployed FastAPI base URL in Vercel → Settings → Environment Variables
-- Landing footer shows **Vercel logotype** (`src/components/VercelLogotype.jsx`)
+1. **Project Settings → General → Root Directory:** `frontend` (required)
+2. **Framework Preset:** Vite (auto-detected)
+3. **Build Command:** `npm run build` (default)
+4. **Output Directory:** `dist` (default)
+5. **Do not** enable Python / Serverless for this repo
+6. **Environment:** `VITE_API_URL` = your API URL (or leave empty for UI-only demo; predict needs API elsewhere)
+
+Redeploy after push. If error in **2s**, Root Directory is usually wrong. If **500 MB**, Python was bundled — use frontend only.
+
+Config file: `frontend/vercel.json` only (no root `vercel.json`).
 
 
 Toggle light/dark from navbar or Profile page. Primary green `#4CAF50`, AI blue `#2196F3`, glassmorphism cards.
