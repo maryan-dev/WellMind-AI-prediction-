@@ -1,11 +1,12 @@
 # WellMind AI: Lifestyle Category Classification and API Deployment
 
-**Author:** Maryan Mohamed Adam
-**Bootcamp:** DS-ML Bootcamp
-**Project:** Final Project — ML Model Development and Deployment
+**Author:** Maryan Mohamed Adam  
+**Bootcamp:** DS-ML Bootcamp  
+**Project:** Final Project — ML Model Development and Deployment  
 **Date:** July 2026
 
 ---
+
 ## 1. Abstract
 
 This project develops a machine learning-based lifestyle classification system called WellMind AI. The system predicts whether a user's lifestyle is Healthy, Average, or Poor using ten lifestyle-related features such as sleep duration, sleep quality, stress level, physical activity, and BMI category. Multiple machine learning algorithms were compared, with XGBoost selected as the final model based on Macro F1-score. The trained model was deployed using FastAPI and integrated with optional React and Flutter applications.
@@ -43,7 +44,7 @@ Implemented in **`notebook/1_preprocessing.ipynb`** and **`notebook/paths.py`**:
 4. **Split** — 80% train / 20% test, stratified on target, saved as:
    - `notebook/data/train_processed.csv`
    - `notebook/data/test_processed.csv`
-   - `notebook/test_targets.csv` (labels for evaluation)
+   - `notebook/data/test_targets.csv` (labels for evaluation)
 
 > **Important design choice:** The classifier is trained on **10 raw lifestyle columns only**, not on derived wellness scores, to avoid target leakage. Derived scores appear in the API response for user-facing dashboards.
 
@@ -79,7 +80,7 @@ All models were trained on the **same** train set and evaluated on the **same** 
 
 ### 5.1 Model Comparison (Test Set)
 
-Metrics exported to **`notebook/model_comparison.csv`**. Summary:
+Metrics exported to **`notebook/outputs/model_comparison.csv`**. Summary:
 
 | Algorithm | Test Accuracy | Macro F1 | Notes |
 |---|---|---|---|
@@ -107,11 +108,11 @@ py -3 scripts/run_sanity_checks.py
 
 Expected behavior:
 
-1. **High sleep + activity, low stress** → higher wellness score; category **Healthy** or **Average** (ML or fallback).
+1. **High sleep + activity, low stress** → higher wellness score; category **Healthy** or **Average**.
 2. **Short sleep, high stress, low steps** → lower wellness; category **Poor** or **Average**.
 3. **Moderate inputs** → mid wellness; **Average** most likely.
 
-Exact labels depend on whether `best_model.pkl` is loaded or the API uses the documented rule-based fallback when artifacts are missing.
+Production **`POST /predict`** uses **`notebook/inference.py`** (aligned with **`notebook/4_inference.ipynb`**) when `notebook/artifacts/best_model.pkl` is present; otherwise the API returns **503** (ML not loaded).
 
 ---
 
@@ -134,7 +135,7 @@ curl -X POST http://127.0.0.1:8000/predict \
 
 **Example response fields:** `lifestyle_category`, `wellness_score`, `confidence`, `scores`, `recommendations`, `model_name`.
 
-Only **XGBoost** (`notebook/best_model.pkl`) is designated for production when artifacts load successfully; metrics table justifies this choice.
+**XGBoost** (`notebook/artifacts/best_model.pkl`) is used for production when artifacts load successfully; the metrics table justifies this choice.
 
 ### 6.2 Frontend (Optional / Extra Credit)
 
@@ -147,7 +148,7 @@ Both call the same JSON API.
 
 | Path | Role |
 |---|---|
-| `notebook/` | Data, preprocessing, training, `.pkl` models |
+| `notebook/` | Data, preprocessing, training, artifacts |
 | `api/` | FastAPI service and inference helpers |
 | `frontend/` | Web UI |
 | `mobile/` | Mobile UI |
@@ -163,12 +164,14 @@ Both call the same JSON API.
 4. **Improvements** — Add probability calibration, SHAP explanations, and automated tests in CI; register models with MLflow; deploy with Docker for production.
 
 ---
+
 ## 8. Conclusion
 
 WellMind AI successfully demonstrates the complete machine learning workflow, from preprocessing and feature engineering to model training, evaluation, and deployment. Among five supervised learning algorithms, XGBoost achieved the best performance and was selected for deployment. The project satisfies the bootcamp requirements and provides a practical wellness classification system that can be extended with explainable AI and cloud deployment.
+
 ---
 
-## 9.  References
+## 9. References
 
 - Imaginative_Coder. *Sleep Health Data*. Kaggle. https://www.kaggle.com/datasets/imaginativecoder/sleep-health-data-sampled
 - Scikit-learn Documentation: https://scikit-learn.org/stable/
