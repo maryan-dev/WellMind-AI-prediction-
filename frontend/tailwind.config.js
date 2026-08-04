@@ -29,6 +29,9 @@ export default {
         "fade-in": "fadeIn 0.5s ease-out",
         "slide-up": "slideUp 0.45s ease-out",
         "pulse-soft": "pulseSoft 2s ease-in-out infinite",
+        "ring-draw": "ringDraw 1.2s ease-out both",
+        "bar-fill": "barFill 1s ease-out both",
+        "float-soft": "floatSoft 4s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: { from: { opacity: "0" }, to: { opacity: "1" } },
@@ -39,6 +42,18 @@ export default {
         pulseSoft: {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.7" },
+        },
+        ringDraw: {
+          from: { strokeDashoffset: "251.3" },
+          to: { strokeDashoffset: "37.7" },
+        },
+        barFill: {
+          from: { transform: "scaleX(0)" },
+          to: { transform: "scaleX(1)" },
+        },
+        floatSoft: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-6px)" },
         },
       },
       boxShadow: {

@@ -30,6 +30,37 @@ function normalizeDisorder(ui) {
   return "None";
 }
 
+const SLEEP_TARGET_MIN = 7;
+const SLEEP_TARGET_MAX = 8;
+
+function roundHalf(n) {
+  return Math.round(n * 2) / 2;
+}
+
+function formatHours(n) {
+  return Number.isInteger(n) ? String(n) : String(n);
+}
+
+/** Hours missing to reach the 7–8h recommended range. */
+export function sleepHoursToAdd(sleep) {
+  const s = Number(sleep);
+  if (!Number.isFinite(s)) return { min: 0, max: 0 };
+  const min = Math.max(0, roundHalf(SLEEP_TARGET_MIN - s));
+  const max = Math.max(0, roundHalf(SLEEP_TARGET_MAX - s));
+  return { min, max };
+}
+
+export function sleepIncreaseAdvice(sleep) {
+  const { min, max } = sleepHoursToAdd(sleep);
+  if (max <= 0) return null;
+  const amount =
+    min <= 0 || min === max ? formatHours(max) : `${formatHours(min)}–${formatHours(max)}`;
+  return {
+    increase: `Increase your sleep by ${amount} hours.`,
+    shortfall: `You are ${formatHours(max)} hours short of the recommended ${SLEEP_TARGET_MAX} hours.`,
+  };
+}
+
 /** @returns {{ id: string, category: string, tone: 'positive'|'warning'|'neutral', text: string }[]} */
 export function buildFeatureRecommendations(form) {
   const sleep = Number(form.sleepDuration) || 7;
@@ -51,14 +82,21 @@ export function buildFeatureRecommendations(form) {
     });
   };
 
-  // 😴 Sleep Duration
+  // 😴 Sleep Duration — tell exactly how many hours are missing vs 7–8h
+  const sleepAdvice = sleepIncreaseAdvice(sleep);
   if (sleep < 5) {
     push("Sleep Duration", "warning", "Sleep is critically low.");
-    push("Sleep Duration", "warning", "Increase your sleep by 2–3 hours.");
+    if (sleepAdvice) {
+      push("Sleep Duration", "warning", sleepAdvice.increase);
+      push("Sleep Duration", "warning", sleepAdvice.shortfall);
+    }
     push("Sleep Duration", "warning", "Avoid screen time before bed.");
     push("Sleep Duration", "warning", "Try sleeping before 10:30 PM.");
   } else if (sleep < 7) {
-    push("Sleep Duration", "warning", "Increase sleep by about 1 hour.");
+    if (sleepAdvice) {
+      push("Sleep Duration", "warning", sleepAdvice.increase);
+      push("Sleep Duration", "warning", sleepAdvice.shortfall);
+    }
     push("Sleep Duration", "warning", "Maintain a consistent bedtime.");
     push("Sleep Duration", "warning", "Reduce caffeine in the evening.");
   } else if (sleep <= 9) {

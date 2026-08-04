@@ -5,6 +5,7 @@ export default function InputField({
   value,
   onChange,
   error,
+  hint,
   as = "input",
   options = [],
   icon: Icon,
@@ -42,7 +43,11 @@ export default function InputField({
           />
         )}
       </div>
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {error ? (
+        <p className="text-xs text-red-500">{error}</p>
+      ) : hint ? (
+        <p className="text-xs text-[var(--text-muted)]">{hint}</p>
+      ) : null}
     </label>
   );
 }
